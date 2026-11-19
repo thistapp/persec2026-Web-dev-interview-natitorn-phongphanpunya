@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+	--background: #ffffff;
+	--foreground: #171717;
+}
+
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--font-sans: var(--font-geist-sans);
+	--font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #0a0a0a;
+		--foreground: #ededed;
+	}
+}
+
+body {
+	background: var(--background);
+	color: var(--foreground);
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Menu links (#function-1 ...) glide to their section instead of jumping. */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Briefly highlight the section you just jumped to. */
+@keyframes section-arrive {
+	0%,
+	30% {
+		box-shadow: 0 0 0 0 rgb(99 102 241 / 0);
+	}
+	50% {
+		box-shadow: 0 0 0 4px rgb(99 102 241 / 0.6);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgb(99 102 241 / 0);
+	}
+}
+
+section:target {
+	animation: section-arrive 1.4s ease-out;
+}
+
+/* Respect the system "reduce motion" setting: jump instantly, no pulse. */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	section:target {
+		animation: none;
+	}
+}
